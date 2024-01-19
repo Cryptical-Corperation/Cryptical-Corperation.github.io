@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $randomString .= $characters[rand(0, strlen($characters) - 1)];
             }
 
-            $phpFileName = 'Mt-' . $randomString . '.html';
-            $phpContent = <<<EOD
+            $htmlFileName = 'Mt-' . $randomString . '.html';
+            $htmlContent = <<<EOD
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>
 EOD;
-            file_put_contents($phpFileName, $phpContent);
+            file_put_contents($htmlFileName, $htmlContent);
 
             // Update the videos.html file with a new <button> element inside a <p>
             $videosPage = 'videos.html';
             $videosContent = file_get_contents($videosPage);
-            $newButton = '<p><button id="video" onclick="location.href=\'' . $phpFileName . '\'">' . $videoName . '</button></p>';
+            $newButton = '<p><button id="video" onclick="location.href=\'' . $htmlFileName . '\'">' . $videoName . '</button></p>';
             $pos = strpos($videosContent, '<div id="videos">');
             if ($pos !== false) {
                 $videosContent = substr_replace($videosContent, '<div id="videos">' . $newButton, $pos, 0);
