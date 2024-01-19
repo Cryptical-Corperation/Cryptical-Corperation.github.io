@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $randomString .= $characters[rand(0, strlen($characters) - 1)];
             }
 
-            $phpFileName = 'Mt-' . $randomString . '.php';
+            $phpFileName = 'Mt-' . $randomString . '.html';
             $phpContent = <<<EOD
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>
 EOD;
-            file_put_contents($phpFileName, $phpContent);
+            file_put_contents($htmlFileName, $htmlContent);
 
-            // Update the videos.php file with a new <button> element inside a <p>
-            $videosPage = 'videos.php';
+            // Update the videos.html file with a new <button> element inside a <p>
+            $videosPage = 'videos.html';
             $videosContent = file_get_contents($videosPage);
-            $newButton = '<p><button id="video" onclick="location.href=\'' . $phpFileName . '\'">' . $videoName . '</button></p>';
+            $newButton = '<p><button id="video" onclick="location.href=\'' . $htmlFileName . '\'">' . $videoName . '</button></p>';
             $pos = strpos($videosContent, '<div id="videos">');
             if ($pos !== false) {
                 $videosContent = substr_replace($videosContent, '<div id="videos">' . $newButton, $pos, 0);
@@ -83,14 +83,14 @@ EOD;
             // Clear the output buffer
             ob_end_clean();
 
-            // Redirect to the created PHP file
-            header("Location: $phpFileName");
+            // Redirect to the created HTML file
+            header("Location: $htmlFileName");
             exit; // Make sure to exit after the header redirection
         } else {
             ob_end_clean(); // Clear the output buffer in case of upload failure
 
-            // Redirect to error.php in case of upload failure
-            header("Location: error.php");
+            // Redirect to error.html in case of upload failure
+            header("Location: error.html");
             exit;
         }
     }
