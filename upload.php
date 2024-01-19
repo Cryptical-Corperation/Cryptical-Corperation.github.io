@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $videoCreationTimestamp = filectime($uploadDirectory . $videoFileName);
             $videoCreationDate = date("F jS, Y", $videoCreationTimestamp);
 
-            // Create the PHP file
+            // Create the HTML file
             $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $randomString = '';
             for ($i = 0; $i < 7; $i++) {
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <h1>MyTube</h1>
-<section><button onclick="location.href='index.html'">Home</button>
+<section><button onclick="location.href='https://mytube.cryptical-corp.repl.co/'">Home</button>
 <button onclick="location.href='videos.html'">Videos</button></section>
 <section>
 <video src="uploads/$videoFileName" controls></video></section>
@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>
 EOD;
-            file_put_contents($htmlFileName, $htmlContent);
+            file_put_contents($phpFileName, $phpContent);
 
             // Update the videos.html file with a new <button> element inside a <p>
             $videosPage = 'videos.html';
             $videosContent = file_get_contents($videosPage);
-            $newButton = '<p><button id="video" onclick="location.href=\'' . $htmlFileName . '\'">' . $videoName . '</button></p>';
+            $newButton = '<p><button id="video" onclick="location.href=\'' . $phpFileName . '\'">' . $videoName . '</button></p>';
             $pos = strpos($videosContent, '<div id="videos">');
             if ($pos !== false) {
                 $videosContent = substr_replace($videosContent, '<div id="videos">' . $newButton, $pos, 0);
