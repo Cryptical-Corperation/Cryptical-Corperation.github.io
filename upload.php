@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <h1>MyTube</h1>
-<section><button onclick="location.href='https://mytube.cryptical-corp.repl.co/'">Home</button>
+<section><button onclick="location.href='index.html'">Home</button>
 <button onclick="location.href='videos.html'">Videos</button></section>
 <section>
 <video src="uploads/$videoFileName" controls></video></section>
@@ -89,8 +89,8 @@ EOD;
         } else {
             ob_end_clean(); // Clear the output buffer in case of upload failure
 
-            // Redirect to error.html in case of upload failure
-            header("Location: error.html");
+            // Redirect to error.php in case of upload failure
+            header("Location: error.php");
             exit;
         }
     }
